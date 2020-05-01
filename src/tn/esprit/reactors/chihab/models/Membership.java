@@ -5,8 +5,22 @@ import tn.esprit.reactors.chihab.models.enums.AccessType;
 
 
 public class Membership {
+    public static final String INVITE_PENDING = "INVITE_PENDING";
+    public static final String REQUEST_PENDING = "REQUEST_PENDING";
+    public static final String DENIED_BY_USER = "DENIED_BY_USER";
+    public static final String DENIED_BY_ASS = "DENIED_BY_ASS";
+    public static final String ACCEPTED = "ACCEPTED";
+
     private int id;
-    private String fonction, description;
+    private String fonction, description, status;
+
+    public String getStatus() {
+        return status;
+    }
+
+    public void setStatus(String status) {
+        this.status = status;
+    }
     private User member;
 
     public User getMember() {
@@ -18,10 +32,11 @@ public class Membership {
     }
     private AccessType access;
 
-    public Membership(int id, String fonction, String description) { 
+    public Membership(int id, String fonction, String description, String status) { 
         this.id=id;
         this.fonction=fonction;
         this.description=description;
+        this.status=status;
     }
 
     public int getId() {

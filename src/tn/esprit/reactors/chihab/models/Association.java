@@ -144,8 +144,10 @@ public class Association {
     public String getDomaineNom() {
         return this.getDomaine().getNom();
     }
+
     @Override
     public String toString() {
-        return "Association{id= "+id+" nom= "+nom+" ville= "+ville+"}"+System.getProperty("line.separator");
+        return "Association{" + "id=" + id + ", manager=" + manager + ", domaine=" + domaine + ", nom=" + nom + ", photoAgence=" + photoAgence + ", pieceJustificatif=" + pieceJustificatif + ", rue=" + rue + ", description=" + description + ", ville=" + ville + ", horaireTravail=" + horaireTravail + ", telephone=" + telephone + ", codePostal=" + codePostal + ", approuved=" + approuved + ", lat=" + lat + ", lon=" + lon + '}';
     }
+
 }

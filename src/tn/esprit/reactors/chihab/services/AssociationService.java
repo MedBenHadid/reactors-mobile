@@ -15,6 +15,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 import com.codename1.io.NetworkManager;
+import com.codename1.io.rest.Rest;
 import java.io.IOException;
 import tn.esprit.reactors.chihab.models.Association;
 
