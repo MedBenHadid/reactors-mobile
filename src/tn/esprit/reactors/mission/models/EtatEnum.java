@@ -1,20 +1,16 @@
-package tn.esprit.reactors.chihab.models.enums;
+package tn.esprit.reactors.mission.models;
 
-public enum AccessType {
-    WRITE,
-    READ,
-    DELIVER;
+public enum EtatEnum{
+    inviter,
+    accepter,
+    réfuser;
 
-    public static int getRole(AccessType accessType) {
-        switch (accessType) {
-            case WRITE:
-                return 1;
-            case READ:
-                return 2;
-            case DELIVER:
-                return 3;
-            default:
-                return 2;
+    public static String getEtat(String etat) {
+        switch (etat) {
+            case "accepter": return "accepter";
+            case "réfuser":return "réfuser";
+            case "inviter":return "inviter";
+            default:return "inviter";
         }
     }
 }
