@@ -11,7 +11,23 @@ public class Membership {
     public static final String DENIED_BY_ASS = "DENIED_BY_ASS";
     public static final String ACCEPTED = "ACCEPTED";
 
-    private int id;
+    private int id, assId, memberId;
+
+    public int getAssId() {
+        return assId;
+    }
+
+    public void setAssId(int assId) {
+        this.assId = assId;
+    }
+
+    public int getMemberId() {
+        return memberId;
+    }
+
+    public void setMemberId(int memberId) {
+        this.memberId = memberId;
+    }
     private String fonction, description, status;
 
     public String getStatus() {
@@ -32,11 +48,13 @@ public class Membership {
     }
     private AccessType access;
 
-    public Membership(int id, String fonction, String description, String status) { 
+    public Membership(int id, int assId, int memberId, String fonction, String description, String status) { 
         this.id=id;
         this.fonction=fonction;
         this.description=description;
         this.status=status;
+        this.assId=assId;
+        this.memberId=memberId;
     }
 
     public int getId() {

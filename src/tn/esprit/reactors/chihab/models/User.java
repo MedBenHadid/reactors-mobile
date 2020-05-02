@@ -10,7 +10,7 @@ public class User{
     private String username, email, password;
     private boolean enabled, approuved, banned;
     private ArrayList<RoleEnum> roles;
-    private Profile profile;
+    private String nom,prenom,telephone,adresse,image,cin;
 
     public String getPassword() {
         return password;
@@ -36,10 +36,6 @@ public class User{
         this.roles = roles;
     }
 
-    public Profile getProfile() {
-        return profile;
-    }
-    public void setProfile(Profile profile) {this.profile = profile;}
 
     @Override
     public boolean equals(Object o) {
@@ -77,7 +73,6 @@ public class User{
         this.enabled = true;
         this.roles = new ArrayList<RoleEnum>();
         this.roles.add(RoleEnum.ROLE_CLIENT);
-        this.profile = new Profile();
     }
     
     public User(int id, String email, String username){
@@ -89,7 +84,6 @@ public class User{
         this.enabled = true;
         this.roles = new ArrayList<RoleEnum>();
         this.roles.add(RoleEnum.ROLE_CLIENT);
-        this.profile = new Profile();
     }
 
 }

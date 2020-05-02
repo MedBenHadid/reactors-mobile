@@ -43,17 +43,27 @@ public class MembershipService {
      * @param status
      * @return 
      */
-    public java.util.List<Membership> fetchMemberships(int id, int page, int oneForAssociation, String status) {
+    public java.util.List<Membership> fetchMemberships(int id, int oneForAssociation, String status) {
         try {
             req.setPost(false);
-            req.setUrl(Statics.BASE_URL+"/api/associations/memberships/"+String.valueOf(id)+"/"+String.valueOf(oneForAssociation)+"/"+status+"/"+page);
+            req.setUrl(Statics.BASE_URL+"/api/associations/memberships/"+String.valueOf(id)+"/"+String.valueOf(oneForAssociation)+"/"+status);
             NetworkManager.getInstance().addToQueueAndWait(req);
             List<Membership> memberships=new ArrayList<>();
             JSONParser j = new JSONParser();
             Map<String,Object> associationListJson = j.parseJSON(new CharArrayReader(new String(req.getResponseData()).toCharArray()));
             List<Map<String,Object>> list = (List<Map<String,Object>>)associationListJson.get("root");
             for(Map<String,Object> obj : list){
-                memberships.add(new Membership( (int)(Double.parseDouble(obj.get("id").toString())),obj.get("fonction").toString(),obj.get("description").toString() , obj.get("status").toString()));
+                Map<String,Object> user = (Map<String,Object>)obj.get("user");
+                Map<String,Object> ass = (Map<String,Object>)obj.get("association");
+                System.out.println(user);
+                System.out.println(ass);
+                memberships.add(
+                    new Membership( 
+                        (int)(Double.parseDouble(obj.get("id").toString())),
+                        (int)(Double.parseDouble(user.get("id").toString())),
+                        (int)(Double.parseDouble(ass.get("id").toString())),
+                        obj.get("fonction").toString(),obj.get("description").toString() , 
+                        obj.get("status").toString()));
             }
             return memberships;
         } catch(IOException err) {

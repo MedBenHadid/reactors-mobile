@@ -15,7 +15,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 import com.codename1.io.NetworkManager;
-import com.codename1.io.rest.Rest;
+import com.google.gson.Gson;
 import java.io.IOException;
 import tn.esprit.reactors.chihab.models.Association;
 
@@ -61,7 +61,6 @@ public class AssociationService {
         req.setPost(false);
         String optional = (!nom.isEmpty()?"/"+nom :"")+(!ville.isEmpty()?"/"+ville:"");
         req.setUrl(Statics.BASE_URL+"/api/associations/"+page+optional);
-        page++;
         NetworkManager.getInstance().addToQueueAndWait(req);
         associations=new ArrayList<>();
         JSONParser j = new JSONParser();
@@ -73,9 +72,14 @@ public class AssociationService {
         return associations;
     }
     
-    public boolean addAssociation(Association u) {
-        String url = Statics.BASE_URL + "/association";
+    public boolean addAssociation(Association a) {
+        String url = Statics.BASE_URL + "/api/association";
         req.setUrl(url);
+        req.setPost(true);
+        Gson g = new Gson();
+        System.out.println(g.toJson(a));
+        req.setRequestBody(g.toJson(a));
+        req.setContentType("application/json");
         req.addResponseListener(new ActionListener<NetworkEvent>() {
             @Override
             public void actionPerformed(NetworkEvent evt) {

@@ -19,13 +19,17 @@ import com.codename1.ui.Display;
 import com.codename1.ui.EncodedImage;
 import com.codename1.ui.FontImage;
 import com.codename1.ui.Form;
+import com.codename1.ui.InfiniteContainer;
 import com.codename1.ui.Label;
 import com.codename1.ui.TextArea;
 import com.codename1.ui.events.ActionEvent;
+import com.codename1.ui.layouts.BorderLayout;
 import com.codename1.ui.plaf.Style;
 import com.codename1.ui.plaf.UIManager;
+import com.google.gson.Gson;
 import java.io.IOException;
 import java.io.InputStream;
+import java.util.List;
 import tn.esprit.reactors.ReactorsForm;
 import tn.esprit.reactors.chihab.models.Association;
 import tn.esprit.reactors.chihab.models.Membership;
@@ -77,7 +81,8 @@ public class AssociationProfileAssociationForm extends ReactorsForm {
         this.add("Contact info :").add(ComponentGroup.enclose(phone));
         
         
-        
+        Gson g = new Gson();
+        System.out.println(g.toJson(a));
         
         
         
@@ -85,26 +90,11 @@ public class AssociationProfileAssociationForm extends ReactorsForm {
 
 
         this.add("Memberships :");
-        InfiniteScrollAdapter.createInfiniteScroll(this.getContentPane(), () -> {
-            java.util.List<Membership> data = MembershipService.getInstance().fetchMemberships(a.getId(),page,1,Membership.ACCEPTED);
-            MultiButton[] cmps = new MultiButton[data.size()];
-            for (int iter = 0; iter < cmps.length; iter++) {
-                Membership currentListing = data.get(iter);
-                if (data.isEmpty()) {
-                    InfiniteScrollAdapter.addMoreComponents(getContentPane(), new Component[0], false);
-                    return;
-                }
-                // TODO : Fill out with user info
-                cmps[iter] = new MultiButton("");
-                cmps[iter].setTextLine2(currentListing.getFonction());
-                cmps[iter].setIcon(placeholder);
-                cmps[iter].setTextLine3(currentListing.getDescription());
-                //cmps[iter].setIcon(URLImage.createToStorage(placeholder, String.valueOf(currentListing.getId()), Statics.BASE_URL+"/api/associations/image/"+currentListing.getPhotoAgence()));
-            }
-            page++;
-            InfiniteScrollAdapter.addMoreComponents(getContentPane(), cmps, !data.isEmpty());
-        }, true); 
-        
+        for(Membership m : MembershipService.getInstance().fetchMemberships(a.getId(), 1, Membership.ACCEPTED)){
+            MultiButton mm = new MultiButton(m.getFonction());
+            mm.setIcon(PEOPLE);
+            this.add(mm);
+        }
         
         this.add("Interested by the cause ? Apply now!");
         MultiButton join = new MultiButton("Fill out the form");
