@@ -43,7 +43,7 @@ public class ListMissionForm extends ReactorsForm{
                     Mission currentListing = data.get(iter);
                     cmps[iter] = new MultiButton(currentListing.getTitleMission());
                     cmps[iter].addActionListener(e -> {
-                       // new AssociationProfileAssociationForm(thisHolder,currentListing).showBack();
+                        new MissionProfileForm(thisHolder,currentListing).showBack();
                     });
                     cmps[iter].setEmblem(BUTTON_RIGHT);
                     cmps[iter].setIcon(URLImage.createToStorage(PLACEHOLDER, String.valueOf(currentListing.getId()), Statics.BASE_URL+"/missionApi/Fetchimage/"+currentListing.getPicture()));

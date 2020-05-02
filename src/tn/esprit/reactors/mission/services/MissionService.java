@@ -20,6 +20,7 @@ import java.io.IOException;
 import java.util.Date;
 import tn.esprit.reactors.chihab.models.Category;
 import tn.esprit.reactors.chihab.models.User;
+import tn.esprit.reactors.chihab.services.CategoryService;
 import tn.esprit.reactors.mission.models.Mission;
 
 /**
@@ -48,10 +49,11 @@ public class MissionService {
         Mission m = new Mission( (int)(Double.parseDouble(obj.get("id").toString())),obj.get("titleMission").toString() );
       //  m.setId((int)obj.get("id"));
       //  m.setTitleMission(obj.get("TitleMission").toString());
-        m.setDomaine((Category)obj.get("domaine"));
+      //CategoryService.getInstance().parseCategory(obj);
+    //  m.setDomaine((Category)obj.get("domaine"));
         m.setDescription(obj.get("description").toString());
         m.setLocation(obj.get("location").toString());
-        m.setUps((int)obj.get("ups"));
+        m.setUps(((int)(Double.parseDouble(obj.get("ups").toString()))));
         m.setObjectif((Double)obj.get("objectif"));
         m.setSumCollected((Double)obj.get("sumCollected"));
         m.setCretedBy((User)obj.get("CretedBy"));
@@ -66,8 +68,10 @@ public class MissionService {
     public java.util.List<Mission> fetchMission(String title, String location, int page) throws IOException {
         req.setPost(false);
         String optional = (!title.isEmpty()?"/"+title :"")+(!location.isEmpty()?"/"+location:"");
+        String association ="73";
         req.setUrl(Statics.BASE_URL+"/missionApi/showAll/"+page+optional);
-                
+                       req.addArgument("association", association);
+ 
         page++;
         NetworkManager.getInstance().addToQueueAndWait(req);
         missions=new ArrayList<>();

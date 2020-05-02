@@ -85,6 +85,7 @@ public class SignUpAssociation extends ReactorsForm{
                         e.printStackTrace();
                     }
                 }
+             //   Display.getInstance().getLocationManager().getCurrentLocation().getL
             }
         }, Display.GALLERY_IMAGE);
         this.NEXT_BUTTON.setMaterialIcon(FontImage.MATERIAL_CHECK_CIRCLE);
