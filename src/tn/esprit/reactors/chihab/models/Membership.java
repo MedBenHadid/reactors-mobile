@@ -12,6 +12,7 @@ public class Membership {
     public static final String ACCEPTED = "ACCEPTED";
 
     private int id, assId, memberId;
+    private String fonction, description, status;
 
     public int getAssId() {
         return assId;
@@ -28,7 +29,7 @@ public class Membership {
     public void setMemberId(int memberId) {
         this.memberId = memberId;
     }
-    private String fonction, description, status;
+    
 
     public String getStatus() {
         return status;

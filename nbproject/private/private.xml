@@ -4,14 +4,18 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/C:/Users/Chihab/Documents/NetBeansProjects/CodenameOne/src/tn/esprit/reactors/chihab/forms/AssociationProfileAssociationForm.java</file>
-            <file>file:/C:/Users/Chihab/Documents/NetBeansProjects/CodenameOne/src/tn/esprit/reactors/chihab/services/UserService.java</file>
             <file>file:/C:/Users/Chihab/Documents/NetBeansProjects/CodenameOne/src/tn/esprit/reactors/chihab/models/Membership.java</file>
-            <file>file:/C:/Users/Chihab/Documents/NetBeansProjects/CodenameOne/src/tn/esprit/reactors/GMap.java</file>
+            <file>file:/C:/Users/Chihab/Documents/NetBeansProjects/CodenameOne/src/tn/esprit/reactors/Statics.java</file>
             <file>file:/C:/Users/Chihab/Documents/NetBeansProjects/CodenameOne/src/tn/esprit/reactors/MyApplication.java</file>
-            <file>file:/C:/Users/Chihab/Documents/NetBeansProjects/CodenameOne/src/tn/esprit/reactors/chihab/services/MembershipService.java</file>
             <file>file:/C:/Users/Chihab/Documents/NetBeansProjects/CodenameOne/src/tn/esprit/reactors/chihab/services/CategoryService.java</file>
-            <file>jar:file:/C:/Users/Chihab/Documents/NetBeansProjects/CodenameOne/lib/CodenameOne_SRC.zip!/com/codename1/ui/InfiniteContainer.java</file>
+            <file>file:/C:/Users/Chihab/Documents/NetBeansProjects/CodenameOne/src/tn/esprit/reactors/chihab/models/Association.java</file>
+            <file>file:/C:/Users/Chihab/Documents/NetBeansProjects/CodenameOne/src/tn/esprit/reactors/chihab/models/UserSession.java</file>
+            <file>file:/C:/Users/Chihab/Documents/NetBeansProjects/CodenameOne/src/tn/esprit/reactors/chihab/forms/SignUpAssociation.java</file>
+            <file>file:/C:/Users/Chihab/Documents/NetBeansProjects/CodenameOne/src/tn/esprit/reactors/chihab/forms/SignUpPhaseTwo.java</file>
+            <file>file:/C:/Users/Chihab/Documents/NetBeansProjects/CodenameOne/src/tn/esprit/reactors/chihab/services/AssociationService.java</file>
+            <file>file:/C:/Users/Chihab/Documents/NetBeansProjects/CodenameOne/src/tn/esprit/reactors/chihab/models/User.java</file>
+            <file>file:/C:/Users/Chihab/Documents/NetBeansProjects/CodenameOne/src/tn/esprit/reactors/chihab/models/Category.java</file>
+            <file>file:/C:/Users/Chihab/Documents/NetBeansProjects/CodenameOne/src/tn/esprit/reactors/chihab/models/Notification.java</file>
         </group>
     </open-files>
 </project-private>

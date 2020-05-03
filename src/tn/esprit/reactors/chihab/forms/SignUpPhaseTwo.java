@@ -5,7 +5,9 @@
  */
 package tn.esprit.reactors.chihab.forms;
 
+import com.codename1.components.InfiniteProgress;
 import com.codename1.components.MultiButton;
+import com.codename1.components.ToastBar;
 import com.codename1.ui.Button;
 import com.codename1.ui.Dialog;
 import com.codename1.ui.Display;
@@ -24,6 +26,7 @@ import java.util.List;
 import tn.esprit.reactors.ReactorsForm;
 import tn.esprit.reactors.chihab.models.Association;
 import tn.esprit.reactors.chihab.models.Category;
+import tn.esprit.reactors.chihab.services.AssociationService;
 import tn.esprit.reactors.chihab.services.CategoryService;
 
 /**
@@ -71,7 +74,7 @@ public class SignUpPhaseTwo extends ReactorsForm{
                         domaineDropDownButton.setIcon(mb.getIcon());
                         d.dispose();
                         domaineDropDownButton.revalidate();
-                        a.setDomaine(cat);
+                        a.setDomaine(cat.getId());
                     });
                 }
                 d.showPopupDialog(domaineDropDownButton);
@@ -120,7 +123,15 @@ public class SignUpPhaseTwo extends ReactorsForm{
                 a.setCodePostal(Integer.parseInt(zipCode.getText()));
                 a.setRue(adress.getText());
                 a.setHoraireTravail("De "+((int)dePicker.getPicker().getValue()/60)+" vers "+((int)versPicker.getPicker().getValue()/60));
-                System.out.println(a); 
+                Dialog ip = new InfiniteProgress().showInfiniteBlocking();
+                a.setManager(20);
+                AssociationService.getInstance().addAssociation(a);
+                // TODO: Upload files
+                // do some long operation here using invokeAndBlock or do something in a separate thread and callback later
+                // when you are done just call
+
+                ip.dispose();
+                ToastBar.showInfoMessage("Jawek béhi");
             }
 
         });

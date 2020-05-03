@@ -73,13 +73,9 @@ public class AssociationService {
     }
     
     public boolean addAssociation(Association a) {
-        String url = Statics.BASE_URL + "/api/association";
-        req.setUrl(url);
-        req.setPost(true);
+        req.setUrl(Statics.BASE_URL + "/api/association");
         Gson g = new Gson();
-        System.out.println(g.toJson(a));
         req.setRequestBody(g.toJson(a));
-        req.setContentType("application/json");
         req.addResponseListener(new ActionListener<NetworkEvent>() {
             @Override
             public void actionPerformed(NetworkEvent evt) {

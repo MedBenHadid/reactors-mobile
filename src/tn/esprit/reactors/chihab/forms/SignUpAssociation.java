@@ -130,11 +130,6 @@ public class SignUpAssociation extends ReactorsForm{
             if(null==this.file||null==this.img){
                 Dialog.show("Missing fields", "Please provide the association image and it's dra chnya blah blah blah", "OK", null);
             }else{
-                System.out.println(nom.getText());
-                System.out.println(phone.getText());
-                System.out.println(description.getText());
-                
-                
                 a.setNom(nom.getText());
                 a.setDescription(description.getText());
                 a.setTelephone(Integer.parseInt(phone.getText()));
