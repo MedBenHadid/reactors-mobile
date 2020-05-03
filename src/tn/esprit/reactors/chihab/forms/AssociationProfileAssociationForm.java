@@ -11,17 +11,25 @@ import com.codename1.components.MultiButton;
 import com.codename1.components.SpanLabel;
 import com.codename1.io.Storage;
 import com.codename1.ui.Button;
+import com.codename1.ui.Command;
 import com.codename1.ui.Component;
 import com.codename1.ui.ComponentGroup;
+import com.codename1.ui.Dialog;
 import com.codename1.ui.Display;
 import com.codename1.ui.EncodedImage;
 import com.codename1.ui.FontImage;
 import com.codename1.ui.Form;
+import com.codename1.ui.InfiniteContainer;
 import com.codename1.ui.Label;
+import com.codename1.ui.TextArea;
+import com.codename1.ui.events.ActionEvent;
+import com.codename1.ui.layouts.BorderLayout;
 import com.codename1.ui.plaf.Style;
 import com.codename1.ui.plaf.UIManager;
+import com.google.gson.Gson;
 import java.io.IOException;
 import java.io.InputStream;
+import java.util.List;
 import tn.esprit.reactors.ReactorsForm;
 import tn.esprit.reactors.chihab.models.Association;
 import tn.esprit.reactors.chihab.models.Membership;
@@ -32,14 +40,13 @@ import tn.esprit.reactors.chihab.services.MembershipService;
  * @author Chihab
  */
 public class AssociationProfileAssociationForm extends ReactorsForm {
-    private final FontImage MORE = FontImage.createMaterial(FontImage.MATERIAL_MORE, UIManager.getInstance().getComponentStyle("MultiLine1"));
+    private final Style s = UIManager.getInstance().getComponentStyle("MultiLine1");
     private final FontImage PLACE = FontImage.createMaterial(FontImage.MATERIAL_PLACE, UIManager.getInstance().getComponentStyle("MultiLine1"));
     private final FontImage PEOPLE = FontImage.createMaterial(FontImage.MATERIAL_PEOPLE_OUTLINE, UIManager.getInstance().getComponentStyle("MultiLine1"));
     private final FontImage DESC = FontImage.createMaterial(FontImage.MATERIAL_LOCAL_LIBRARY, UIManager.getInstance().getComponentStyle("MultiLine1"));
     private final FontImage PHONE = FontImage.createMaterial(FontImage.MATERIAL_CALL, UIManager.getInstance().getComponentStyle("MultiLine1"));
-    private final Style s = UIManager.getInstance().getComponentStyle("MultiLine1");
-    private final FontImage p = FontImage.createMaterial(FontImage.MATERIAL_ACCOUNT_CIRCLE, s);
-    private final EncodedImage placeholder = EncodedImage.createFromImage(p.scaled(p.getWidth() * 3, p.getHeight() * 3), false); 
+    private final FontImage ACCOUNT = FontImage.createMaterial(FontImage.MATERIAL_ACCOUNT_CIRCLE, s);
+    private final EncodedImage placeholder = EncodedImage.createFromImage(PEOPLE.scaled(ACCOUNT.getWidth() * 3, ACCOUNT.getHeight() * 3), false); 
     private int page=1;
     public AssociationProfileAssociationForm(Form previous, Association a) {
         super("Profile : "+a.getNom(),previous);
@@ -74,35 +81,37 @@ public class AssociationProfileAssociationForm extends ReactorsForm {
         this.add("Contact info :").add(ComponentGroup.enclose(phone));
         
         
-        
+        Gson g = new Gson();
+        System.out.println(g.toJson(a));
         
         
         
         
 
 
+        this.add("Memberships :");
+        for(Membership m : MembershipService.getInstance().fetchMemberships(a.getId(), 1, Membership.ACCEPTED)){
+            MultiButton mm = new MultiButton(m.getFonction());
+            mm.setIcon(PEOPLE);
+            this.add(mm);
+        }
         
-        InfiniteScrollAdapter.createInfiniteScroll(this.getContentPane(), () -> {
-            java.util.List<Membership> data = MembershipService.getInstance().fetchMemberships(a.getId(),page);
-            MultiButton[] cmps = new MultiButton[data.size()];
-            for (int iter = 0; iter < cmps.length; iter++) {
-                Membership currentListing = data.get(iter);
-                if (data.isEmpty()) {
-                    InfiniteScrollAdapter.addMoreComponents(getContentPane(), new Component[0], false);
-                    return;
-                }
-                cmps[iter] = new MultiButton();
-                cmps[iter].setTextLine2(currentListing.getFonction());
-                cmps[iter].setIcon(placeholder);
-                cmps[iter].setTextLine3(currentListing.getDescription());
-                //cmps[iter].setIcon(URLImage.createToStorage(placeholder, String.valueOf(currentListing.getId()), Statics.BASE_URL+"/api/associations/image/"+currentListing.getPhotoAgence()));
+        this.add("Interested by the cause ? Apply now!");
+        MultiButton join = new MultiButton("Fill out the form");
+        join.addActionListener(e->{
+            if (1==1){
+                // Logged in 
+                TextArea message = new TextArea("Please specify your message",10,10);
+                Command confirm = new Command("Confirm");
+                //confirm.actionPerformed(new ActionEvent(confirm).);
+                Command cancel = new Command("Cancel");
+                Dialog.show("Join "+a.getNom(), message,cancel,confirm);
+            }else{
+                // Not logged in 
             }
-            page++;
-            InfiniteScrollAdapter.addMoreComponents(getContentPane(), cmps, !data.isEmpty());
-        }, true); 
-        
-        
-        
+
+        });
+        this.add(join);
         
         
         

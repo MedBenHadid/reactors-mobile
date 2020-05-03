@@ -17,6 +17,25 @@ public class Association {
         this.nom = nom;
     }
 
+    public Association(User manager, Category domaine, String nom, String photoAgence, String pieceJustificatif, String rue, String description, String ville, String horaireTravail, int telephone, int codePostal, boolean approuved, Double lat, Double lon) {
+        this.manager = manager;
+        this.domaine = domaine;
+        this.nom = nom;
+        this.photoAgence = photoAgence;
+        this.pieceJustificatif = pieceJustificatif;
+        this.rue = rue;
+        this.description = description;
+        this.ville = ville;
+        this.horaireTravail = horaireTravail;
+        this.telephone = telephone;
+        this.codePostal = codePostal;
+        this.approuved = approuved;
+        this.lat = lat;
+        this.lon = lon;
+    }
+    
+
+
     public int getId() {
         return id;
     }
@@ -144,8 +163,10 @@ public class Association {
     public String getDomaineNom() {
         return this.getDomaine().getNom();
     }
+
     @Override
     public String toString() {
-        return "Association{id= "+id+" nom= "+nom+" ville= "+ville+"}"+System.getProperty("line.separator");
+        return "Association{" + "id=" + id + ", manager=" + manager + ", domaine=" + domaine + ", nom=" + nom + ", photoAgence=" + photoAgence + ", pieceJustificatif=" + pieceJustificatif + ", rue=" + rue + ", description=" + description + ", ville=" + ville + ", horaireTravail=" + horaireTravail + ", telephone=" + telephone + ", codePostal=" + codePostal + ", approuved=" + approuved + ", lat=" + lat + ", lon=" + lon + '}';
     }
+
 }
