@@ -6,34 +6,29 @@
 package tn.esprit.reactors.chihab.forms;
 
 import com.codename1.components.ImageViewer;
-import com.codename1.components.InfiniteScrollAdapter;
 import com.codename1.components.MultiButton;
 import com.codename1.components.SpanLabel;
 import com.codename1.io.Storage;
 import com.codename1.ui.Button;
 import com.codename1.ui.Command;
-import com.codename1.ui.Component;
 import com.codename1.ui.ComponentGroup;
 import com.codename1.ui.Dialog;
 import com.codename1.ui.Display;
 import com.codename1.ui.EncodedImage;
 import com.codename1.ui.FontImage;
 import com.codename1.ui.Form;
-import com.codename1.ui.InfiniteContainer;
 import com.codename1.ui.Label;
 import com.codename1.ui.TextArea;
-import com.codename1.ui.events.ActionEvent;
-import com.codename1.ui.layouts.BorderLayout;
 import com.codename1.ui.plaf.Style;
 import com.codename1.ui.plaf.UIManager;
 import com.google.gson.Gson;
 import java.io.IOException;
 import java.io.InputStream;
-import java.util.List;
 import tn.esprit.reactors.ReactorsForm;
 import tn.esprit.reactors.chihab.models.Association;
 import tn.esprit.reactors.chihab.models.Membership;
 import tn.esprit.reactors.chihab.services.MembershipService;
+import tn.esprit.reactors.chihab.services.UserService;
 
 /**
  *
@@ -47,7 +42,7 @@ public class AssociationProfileAssociationForm extends ReactorsForm {
     private final FontImage PHONE = FontImage.createMaterial(FontImage.MATERIAL_CALL, UIManager.getInstance().getComponentStyle("MultiLine1"));
     private final FontImage ACCOUNT = FontImage.createMaterial(FontImage.MATERIAL_ACCOUNT_CIRCLE, s);
     private final EncodedImage placeholder = EncodedImage.createFromImage(PEOPLE.scaled(ACCOUNT.getWidth() * 3, ACCOUNT.getHeight() * 3), false); 
-    private int page=1;
+    private boolean isMember=false;
     public AssociationProfileAssociationForm(Form previous, Association a) {
         super("Profile : "+a.getNom(),previous);
         InputStream is =  null;
@@ -80,11 +75,7 @@ public class AssociationProfileAssociationForm extends ReactorsForm {
         });
         this.add("Contact info :").add(ComponentGroup.enclose(phone));
         
-        
-        Gson g = new Gson();
-        System.out.println(g.toJson(a));
-        
-        
+       
         
         
 
@@ -95,25 +86,14 @@ public class AssociationProfileAssociationForm extends ReactorsForm {
             mm.setIcon(PEOPLE);
             this.add(mm);
         }
-        
-        this.add("Interested by the cause ? Apply now!");
-        MultiButton join = new MultiButton("Fill out the form");
-        join.addActionListener(e->{
-            if (1==1){
-                // Logged in 
-                TextArea message = new TextArea("Please specify your message",10,10);
-                Command confirm = new Command("Confirm");
-                //confirm.actionPerformed(new ActionEvent(confirm).);
-                Command cancel = new Command("Cancel");
-                Dialog.show("Join "+a.getNom(), message,cancel,confirm);
-            }else{
-                // Not logged in 
-            }
-
-        });
-        this.add(join);
-        
-        
+        if(!UserService.getInstance().isMember(a.getId())){
+            this.add("Interested by the cause ? Apply now!");
+            MultiButton join = new MultiButton("Fill out the form");
+            join.addActionListener(e->{
+                new MembershipRequestForm("Request to join "+a.getNom(),this,a.getId()).show();
+            });
+            this.add(join);
+        }
         
         
         

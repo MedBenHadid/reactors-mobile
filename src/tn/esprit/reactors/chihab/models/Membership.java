@@ -11,8 +11,34 @@ public class Membership {
     public static final String DENIED_BY_ASS = "DENIED_BY_ASS";
     public static final String ACCEPTED = "ACCEPTED";
 
-    private int id, assId, memberId;
+    private int id, assId, memberId,role;
+
+    public int getRole() {
+        return role;
+    }
+
+    public void setRole(int role) {
+        this.role = role;
+    }
     private String fonction, description, status;
+    private double lon,lat;
+
+    public double getLon() {
+        return lon;
+    }
+
+    public void setLon(double lon) {
+        this.lon = lon;
+    }
+
+    public double getLat() {
+        return lat;
+    }
+
+    public void setLat(double lat) {
+        this.lat = lat;
+    }
+
 
     public int getAssId() {
         return assId;
@@ -38,24 +64,29 @@ public class Membership {
     public void setStatus(String status) {
         this.status = status;
     }
-    private User member;
-
-    public User getMember() {
-        return member;
-    }
-
-    public void setMember(User member) {
-        this.member = member;
-    }
     private AccessType access;
 
-    public Membership(int id, int assId, int memberId, String fonction, String description, String status) { 
+    public Membership(int id, int assId, int memberId, int role,String fonction, String description, String status, double lon, double lat) { 
         this.id=id;
         this.fonction=fonction;
         this.description=description;
         this.status=status;
         this.assId=assId;
         this.memberId=memberId;
+        this.lon=lon;
+        this.lat=lat;
+        this.role=role;
+    }
+
+    public Membership(int assId, int memberId, int role,String fonction, String description, String status, double lon, double lat) {
+        this.assId = assId;
+        this.memberId = memberId;
+        this.fonction = fonction;
+        this.description = description;
+        this.status = status;
+        this.role=role;
+        this.lon=lon;
+        this.lat=lat;
     }
 
     public int getId() {
@@ -95,13 +126,10 @@ public class Membership {
 
     @Override
     public String toString() {
-        return "Membership{" +
-                "id=" + id +
-                ", fonction='" + fonction + '\'' +
-                ", description='" + description + '\'' +
-                ", access=" + access +
-                '}';
+        return "Membership{" + "id=" + id + ", assId=" + assId + ", memberId=" + memberId + ", status=" + status + '}';
     }
+
+
 
     @Override
     public int hashCode() {

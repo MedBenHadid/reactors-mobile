@@ -8,6 +8,7 @@ package tn.esprit.reactors.chihab.forms;
 import com.codename1.components.InfiniteProgress;
 import com.codename1.components.MultiButton;
 import com.codename1.components.ToastBar;
+import com.codename1.io.rest.Rest;
 import com.codename1.ui.Button;
 import com.codename1.ui.Dialog;
 import com.codename1.ui.Display;
@@ -115,23 +116,24 @@ public class SignUpPhaseTwo extends ReactorsForm{
             if(a.getVille()==null||(int)dePicker.getPicker().getValue()<(int)versPicker.getPicker().getValue()){
                 Dialog.show("Missing fields", "Please check your info", "OK", null);
             }else{
+                Dialog ip = new InfiniteProgress().showInfiniteBlocking();
                 try{
                     a.setLon(Display.getInstance().getLocationManager().getCurrentLocation().getLongitude());
                     a.setLat(Display.getInstance().getLocationManager().getCurrentLocation().getLatitude());
                 }catch(IOException ee){}
+                
                 a.setApprouved(true);
                 a.setCodePostal(Integer.parseInt(zipCode.getText()));
                 a.setRue(adress.getText());
                 a.setHoraireTravail("De "+((int)dePicker.getPicker().getValue()/60)+" vers "+((int)versPicker.getPicker().getValue()/60));
-                Dialog ip = new InfiniteProgress().showInfiniteBlocking();
                 a.setManager(20);
-                AssociationService.getInstance().addAssociation(a);
+                a.setId(AssociationService.getInstance().addAssociation(a));
                 // TODO: Upload files
                 // do some long operation here using invokeAndBlock or do something in a separate thread and callback later
                 // when you are done just call
 
                 ip.dispose();
-                ToastBar.showInfoMessage("Jawek béhi");
+                ToastBar.showMessage("Gucci gucci bratan, SKKRT SKRRRRT",FontImage.MATERIAL_DONE);
             }
 
         });

@@ -6,6 +6,7 @@
 package tn.esprit.reactors.chihab.forms;
 
 import com.codename1.components.ImageViewer;
+import com.codename1.components.InfiniteProgress;
 import com.codename1.components.SpanLabel;
 import com.codename1.ext.filechooser.FileChooser;
 import com.codename1.io.File;
@@ -30,6 +31,7 @@ import java.io.IOException;
 import java.io.InputStream;
 import tn.esprit.reactors.ReactorsForm;
 import tn.esprit.reactors.chihab.models.Association;
+import tn.esprit.reactors.chihab.services.AssociationService;
 
 /**
  *
@@ -127,13 +129,16 @@ public class SignUpAssociation extends ReactorsForm{
             
         this.nextButton.setMaterialIcon(FontImage.MATERIAL_CHECK_CIRCLE);
         this.nextButton.addActionListener(e->{
+             Dialog ip = new InfiniteProgress().showInfiniteBlocking();
             if(null==this.file||null==this.img){
+                ip.dispose();
                 Dialog.show("Missing fields", "Please provide the association image and it's dra chnya blah blah blah", "OK", null);
             }else{
                 a.setNom(nom.getText());
                 a.setDescription(description.getText());
                 a.setTelephone(Integer.parseInt(phone.getText()));
-                SignUpPhaseTwo.getInstance(this, tl, a).show();  
+                ip.dispose();
+                SignUpPhaseTwo.getInstance(this, tl, a).showBack();
             }
         });
         

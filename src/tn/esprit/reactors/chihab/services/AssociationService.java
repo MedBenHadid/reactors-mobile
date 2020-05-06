@@ -9,12 +9,12 @@ import tn.esprit.reactors.Statics;
 import com.codename1.io.CharArrayReader;
 import com.codename1.io.ConnectionRequest;
 import com.codename1.io.JSONParser;
-import com.codename1.io.NetworkEvent;
-import com.codename1.ui.events.ActionListener;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 import com.codename1.io.NetworkManager;
+import com.codename1.io.rest.Response;
+import com.codename1.io.rest.Rest;
 import com.google.gson.Gson;
 import java.io.IOException;
 import tn.esprit.reactors.chihab.models.Association;
@@ -24,14 +24,13 @@ import tn.esprit.reactors.chihab.models.Association;
  * @author Chihab
  */
 public class AssociationService {
-    private ArrayList<Association> associations;
-    
-    public static AssociationService instance=null;
-    public boolean resultOK;
+    private final Gson g = new Gson();
+    private static AssociationService instance=null;
     private ConnectionRequest req;
-
+    public ArrayList<Association> asses;
     private AssociationService() {
-         req = new ConnectionRequest();
+         this.req = new ConnectionRequest();
+         this.asses = new ArrayList();
     }
 
     public static AssociationService getInstance() {
@@ -58,9 +57,9 @@ public class AssociationService {
     }
 
     public java.util.List<Association> fetchDraChnya(String nom, String ville, int page) throws IOException {
+        ArrayList<Association> associations;
+        req.setUrl(Statics.BASE_URL+"/api/associations/"+page+((!nom.isEmpty()?"/"+nom :"")+(!ville.isEmpty()?"/"+ville:"")));
         req.setPost(false);
-        String optional = (!nom.isEmpty()?"/"+nom :"")+(!ville.isEmpty()?"/"+ville:"");
-        req.setUrl(Statics.BASE_URL+"/api/associations/"+page+optional);
         NetworkManager.getInstance().addToQueueAndWait(req);
         associations=new ArrayList<>();
         JSONParser j = new JSONParser();
@@ -72,18 +71,11 @@ public class AssociationService {
         return associations;
     }
     
-    public boolean addAssociation(Association a) {
-        req.setUrl(Statics.BASE_URL + "/api/association");
-        Gson g = new Gson();
-        req.setRequestBody(g.toJson(a));
-        req.addResponseListener(new ActionListener<NetworkEvent>() {
-            @Override
-            public void actionPerformed(NetworkEvent evt) {
-                resultOK = req.getResponseCode() == 200; //Code HTTP 200 OK
-                req.removeResponseListener(this);
-            }
-        });
-        NetworkManager.getInstance().addToQueueAndWait(req);
-        return resultOK;
+    public int addAssociation(Association a) {
+        return (int)(Double.parseDouble(Rest.post(Statics.BASE_URL + "/api/association").contentType("application/json").body(g.toJson(a)).acceptJson().getAsJsonMap().getResponseData().get("id").toString()));
+    }
+    
+    public Association findAssByManager(int managerId){
+        return parseAssociations((Map<String,Object>) Rest.get(Statics.BASE_URL +"/api/associations/findoneby/manager/"+managerId).acceptJson().getAsJsonMap().getResponseData());
     }
 }

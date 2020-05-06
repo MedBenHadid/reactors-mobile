@@ -9,6 +9,9 @@ import com.codename1.io.CharArrayReader;
 import com.codename1.io.ConnectionRequest;
 import com.codename1.io.JSONParser;
 import com.codename1.io.NetworkManager;
+import com.codename1.io.rest.Response;
+import com.codename1.io.rest.Rest;
+import com.google.gson.Gson;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
@@ -21,12 +24,14 @@ import tn.esprit.reactors.chihab.models.Membership;
  * @author Chihab
  */
 public class MembershipService {
+    private final Gson g;
     public static MembershipService instance=null;
     public boolean resultOK;
     private ConnectionRequest req;
 
     private MembershipService() {
          this.req = new ConnectionRequest();
+         this.g = new Gson();
     }
 
     public static MembershipService getInstance() {
@@ -55,19 +60,29 @@ public class MembershipService {
             for(Map<String,Object> obj : list){
                 Map<String,Object> user = (Map<String,Object>)obj.get("user");
                 Map<String,Object> ass = (Map<String,Object>)obj.get("association");
-                System.out.println(user);
-                System.out.println(ass);
                 memberships.add(
                     new Membership( 
                         (int)(Double.parseDouble(obj.get("id").toString())),
-                        (int)(Double.parseDouble(user.get("id").toString())),
                         (int)(Double.parseDouble(ass.get("id").toString())),
+                        (int)(Double.parseDouble(user.get("id").toString())),
+                        3,
                         obj.get("fonction").toString(),obj.get("description").toString() , 
-                        obj.get("status").toString()));
+                        obj.get("status").toString(),
+                        (double)obj.get("longitude"),
+                        (double)obj.get("latitude")
+                    ));
             }
             return memberships;
         } catch(IOException err) {
             return null;
         }
     }
-}
+    
+    
+    public int addMembership(Membership m) {
+        return (int)(Double.parseDouble(Rest.post(Statics.BASE_URL + "/api/membership").contentType("application/json").body(g.toJson(m)).acceptJson().getAsJsonMap().getResponseData().get("id").toString()));
+    }
+
+    public void update(Membership m) {
+        Rest.patch(Statics.BASE_URL + "/api/membership/update").contentType("application/json").body(g.toJson(m)).getAsBytes();
+}   }
