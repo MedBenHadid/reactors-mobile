@@ -84,7 +84,7 @@ public class MissionProfileForm extends ReactorsForm {
 
         
         InfiniteScrollAdapter.createInfiniteScroll(this.getContentPane(), () -> {
-            java.util.List<Membership> data = MembershipService.getInstance().fetchMemberships(m.getId(),1,Membership.ACCEPTED);
+            java.util.List<Membership> data = MembershipService.getInstance().fetchMemberships(m.getId(),1,"acce");
             MultiButton[] cmps = new MultiButton[data.size()];
             for (int iter = 0; iter < cmps.length; iter++) {
                 Membership currentListing = data.get(iter);
