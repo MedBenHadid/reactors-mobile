@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 <?xml version="1.0" encoding="UTF-8"?>
 <project-private xmlns="http://www.netbeans.org/ns/project-private/1">
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/1"/>
@@ -12,3 +13,38 @@
         </group>
     </open-files>
 </project-private>
+=======
+<<<<<<< HEAD
+<?xml version="1.0" encoding="UTF-8"?>
+<project-private xmlns="http://www.netbeans.org/ns/project-private/1">
+    <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/1"/>
+    <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
+    <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
+        <group>
+            <file>file:/C:/Users/Med/Desktop/reactors-mobile/src/tn/esprit/reactors/MyApplication.java</file>
+            <file>file:/C:/Users/Med/Desktop/reactors-mobile/src/tn/esprit/reactors/mission/models/Mission.java</file>
+            <file>file:/C:/Users/Med/Desktop/reactors-mobile/src/tn/esprit/reactors/chihab/forms/MapForm.java</file>
+            <file>file:/C:/Users/Med/Desktop/reactors-mobile/src/tn/esprit/reactors/GMap.java</file>
+        </group>
+    </open-files>
+</project-private>
+=======
+<?xml version="1.0" encoding="UTF-8"?>
+<project-private xmlns="http://www.netbeans.org/ns/project-private/1">
+    <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/1"/>
+    <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
+    <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
+        <group>
+            <file>file:/C:/Users/Chihab/Documents/NetBeansProjects/CodenameOne/src/tn/esprit/reactors/chihab/forms/AssociationProfileAssociationForm.java</file>
+            <file>file:/C:/Users/Chihab/Documents/NetBeansProjects/CodenameOne/src/tn/esprit/reactors/chihab/services/UserService.java</file>
+            <file>file:/C:/Users/Chihab/Documents/NetBeansProjects/CodenameOne/src/tn/esprit/reactors/chihab/models/Membership.java</file>
+            <file>file:/C:/Users/Chihab/Documents/NetBeansProjects/CodenameOne/src/tn/esprit/reactors/GMap.java</file>
+            <file>file:/C:/Users/Chihab/Documents/NetBeansProjects/CodenameOne/src/tn/esprit/reactors/MyApplication.java</file>
+            <file>file:/C:/Users/Chihab/Documents/NetBeansProjects/CodenameOne/src/tn/esprit/reactors/chihab/services/MembershipService.java</file>
+            <file>file:/C:/Users/Chihab/Documents/NetBeansProjects/CodenameOne/src/tn/esprit/reactors/chihab/services/CategoryService.java</file>
+            <file>jar:file:/C:/Users/Chihab/Documents/NetBeansProjects/CodenameOne/lib/CodenameOne_SRC.zip!/com/codename1/ui/InfiniteContainer.java</file>
+        </group>
+    </open-files>
+</project-private>
+>>>>>>> 5efa90845a90415123a8d9d52f2fac54d084da41
+>>>>>>> ea5737e085924165f5d8e3d963453fca0be34d2a
