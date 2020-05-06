@@ -160,6 +160,9 @@ public class SignUpAssociation extends ReactorsForm{
         }
         return instance;
     }
+    public static SignUpAssociation getInstance() {
+        return instance;
+    }
     public void nullify(){
         this.instance=null;
     }

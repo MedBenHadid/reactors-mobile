@@ -43,7 +43,7 @@ public class AssociationHomeForm extends ReactorsForm{
         MultiButton btnSignUp = new MultiButton("Sign up");
         MultiButton btnListAsses = new MultiButton("Discover more");
         btnSignUp.addActionListener(e-> SignUpAssociation.getInstance(this,new TextModeLayout(3, 2)).showBack());
-        btnListAsses.addActionListener(e-> new ListAssociationsForm(this).showBack());
+        btnListAsses.addActionListener(e-> ListAssociationsForm.getInstance(this).showBack());
         btnSignUp.setIcon(PERSON);
         btnListAsses.setIcon(SORT);
         this.addAll(btnSignUp,btnListAsses);
