@@ -10,18 +10,14 @@ import com.codename1.components.MultiButton;
 import com.codename1.components.SpanLabel;
 import com.codename1.io.Storage;
 import com.codename1.ui.Button;
-import com.codename1.ui.Command;
 import com.codename1.ui.ComponentGroup;
-import com.codename1.ui.Dialog;
 import com.codename1.ui.Display;
 import com.codename1.ui.EncodedImage;
 import com.codename1.ui.FontImage;
 import com.codename1.ui.Form;
 import com.codename1.ui.Label;
-import com.codename1.ui.TextArea;
 import com.codename1.ui.plaf.Style;
 import com.codename1.ui.plaf.UIManager;
-import com.google.gson.Gson;
 import java.io.IOException;
 import java.io.InputStream;
 import tn.esprit.reactors.ReactorsForm;
@@ -74,12 +70,6 @@ public class AssociationProfileAssociationForm extends ReactorsForm {
            Display.getInstance().dial(String.valueOf(a.getTelephone()));
         });
         this.add("Contact info :").add(ComponentGroup.enclose(phone));
-        
-       
-        
-        
-
-
         this.add("Memberships :");
         for(Membership m : MembershipService.getInstance().fetchMemberships(a.getId(), 1, Membership.ACCEPTED)){
             MultiButton mm = new MultiButton(m.getFonction());
@@ -94,9 +84,7 @@ public class AssociationProfileAssociationForm extends ReactorsForm {
             });
             this.add(join);
         }
-        
-        
-        
+
         this.show();
     }
 }

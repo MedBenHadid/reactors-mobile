@@ -5,6 +5,7 @@
  */
 package tn.esprit.reactors.chihab.forms;
 
+import com.codename1.charts.util.ColorUtil;
 import com.codename1.components.InfiniteScrollAdapter;
 import com.codename1.components.MultiButton;
 import com.codename1.ui.Component;
@@ -19,6 +20,7 @@ import tn.esprit.reactors.chihab.models.Association;
 import tn.esprit.reactors.chihab.services.AssociationService;
 import tn.esprit.reactors.ReactorsForm;
 import tn.esprit.reactors.Statics;
+import tn.esprit.reactors.chihab.services.UserService;
 
 /**
  *
@@ -31,7 +33,7 @@ public class ListAssociationsForm extends ReactorsForm{
     private final EncodedImage PLACEHOLDER = EncodedImage.createFromImage(PEOPLE.scaled(PEOPLE.getWidth() * 1, PEOPLE.getHeight() * 1), false); 
     private Form thisHolder;
     private int page = 1;
-    private ListAssociationsForm(Form previous) {
+    public ListAssociationsForm(Form previous) {
         super("List associations",previous);
         this.thisHolder=this;
         InfiniteScrollAdapter.createInfiniteScroll(this.getContentPane(), () -> {
@@ -44,6 +46,8 @@ public class ListAssociationsForm extends ReactorsForm{
                     cmps[iter].addActionListener(e -> {
                         new AssociationProfileAssociationForm(thisHolder,currentListing).showBack();
                     });
+                    if(UserService.getInstance().isMember(currentListing.getId()))
+                        cmps[iter].getStyle().setBgColor(ColorUtil.MAGENTA);
                     cmps[iter].setEmblem(BUTTON_RIGHT);
                     cmps[iter].setIcon(URLImage.createToStorage(PLACEHOLDER, String.valueOf(currentListing.getId()), Statics.BASE_URL+"/api/associations/image/"+currentListing.getPhotoAgence()));
                 }
@@ -55,13 +59,13 @@ public class ListAssociationsForm extends ReactorsForm{
         }, true); 
 
   }
-
+    
    
     public static ListAssociationsForm instance=null;
     public static ListAssociationsForm getInstance(Form previous) {
         if (instance == null) {
             instance = new ListAssociationsForm(previous);
-        }
+}
         return instance;
     }
 

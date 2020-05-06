@@ -134,10 +134,6 @@ public class SignUpPhaseTwo extends ReactorsForm{
 
                 ip.dispose();
                 ToastBar.showMessage("Gucci gucci bratan, SKKRT SKRRRRT",FontImage.MATERIAL_DONE);
-                ListAssociationsForm.instance.showBack();
-                SignUpAssociation.getInstance().nullify();
-                this.nullify();
-                
             }
 
         });
