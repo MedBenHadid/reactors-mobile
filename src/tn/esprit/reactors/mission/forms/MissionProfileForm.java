@@ -50,7 +50,10 @@ public class MissionProfileForm extends ReactorsForm {
             EncodedImage i = EncodedImage.create(is, is.available());
             ImageViewer imageViewer = new ImageViewer(i);
             this.addComponent(imageViewer);
-        } catch (IOException ex) {}        SpanLabel sp = new SpanLabel(m.getDescription());
+        } catch (IOException ex) {}
+
+     
+        SpanLabel sp = new SpanLabel(m.getDescription());
         sp.setIcon(DESC);
         this.add(new Label("Descripton :")).add(ComponentGroup.enclose(sp));
         MultiButton locationButton = new MultiButton();
@@ -69,7 +72,17 @@ public class MissionProfileForm extends ReactorsForm {
         //phone.addActionListener(e -> {
          //  Display.getInstance().dial(String.valueOf(m.get()));
        // });
-        this.add("Contact info :").add(ComponentGroup.enclose(phone));  
+        this.add("Contact info :").add(ComponentGroup.enclose(phone));
+        
+        
+        
+        
+        
+        
+        
+
+
+        
         InfiniteScrollAdapter.createInfiniteScroll(this.getContentPane(), () -> {
             java.util.List<Membership> data = MembershipService.getInstance().fetchMemberships(m.getId(),1,Membership.ACCEPTED);
             MultiButton[] cmps = new MultiButton[data.size()];
@@ -87,7 +100,15 @@ public class MissionProfileForm extends ReactorsForm {
             }
             page++;
             InfiniteScrollAdapter.addMoreComponents(getContentPane(), cmps, !data.isEmpty());
-        }, true);  
+        }, true); 
+        
+        
+        
+        
+        
+        
+        
+        
         this.show();
     }
 }

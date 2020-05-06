@@ -57,7 +57,7 @@ public class MyApplication {
         Form F3 = new Form(new FlowLayout(CENTER,CENTER));  
         Form Home = new Form("Menu");
        Toolbar tb = Home.getToolbar(); 
-       InvitesRequestsForm invites = new InvitesRequestsForm("invites",Home,true);
+       InvitesRequestsForm invites = new InvitesRequestsForm("invites",Home,false);
        associations.add(new Label("Associations"));
        F2.add(new Label("Settings"));
        F3.add(new Label("About"));
