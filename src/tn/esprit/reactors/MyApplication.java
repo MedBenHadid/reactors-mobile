@@ -49,7 +49,7 @@ public class MyApplication {
     }
     
     public void start() {
-       Form associations = new Form(new FlowLayout(CENTER,CENTER));
+       /*Form associations = new Form(new FlowLayout(CENTER,CENTER));
        associations.add(new Label("Associations"));
        Form F2 = new Form(new FlowLayout(CENTER,CENTER));
        F2.add(new Label("Settings"));
@@ -96,7 +96,9 @@ public class MyApplication {
         }
         Form hi = new Form("Hi World", BoxLayout.y());
         hi.add(new Label("Hi World"));
-        Home.show();
+        Home.show();*/
+       
+       new MyApplicationNasri().start();
     }
 
     public void stop() {
