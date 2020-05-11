@@ -56,20 +56,21 @@ public class ServiceHebergementRequest implements IService<HebergementRequest>
     public boolean add(HebergementRequest entity) 
     {
         MultipartRequest request = new MultipartRequest();
+        request.setPost(true);
         
         request.setUrl(Statics.BASE_URL_REFUGEES + "hebergementrequest/new");
         
-        request.addArgument("description", entity.getDescription());
-        request.addArgument("native-country", entity.getNativeCountry());
-        request.addArgument("arrival-date", Helpers.format(entity.getArrivalDate()));
+        request.addArgumentNoEncoding("description", entity.getDescription());
+        request.addArgumentNoEncoding("native-country", entity.getNativeCountry());
+        request.addArgumentNoEncoding("arrival-date", Helpers.format(entity.getArrivalDate()));
         //request.addArgument("arrival-date", "2000-01-01");
-        request.addArgument("passport-number", entity.getPassportNumber());
-        request.addArgument("civil-status", String.valueOf(entity.getCivilStatus().ordinal()));
-        request.addArgument("children-number", String.valueOf(entity.getChildrenNumber()));
-        request.addArgument("region", entity.getRegion());
-        request.addArgument("name", entity.getName());
-        request.addArgument("telephone", entity.getTelephone());
-        request.addArgument("is-anonymous", String.valueOf(entity.isAnonymous() ? 1 : 0));
+        request.addArgumentNoEncoding("passport-number", entity.getPassportNumber());
+        request.addArgumentNoEncoding("civil-status", String.valueOf(entity.getCivilStatus().ordinal()));
+        request.addArgumentNoEncoding("children-number", String.valueOf(entity.getChildrenNumber()));
+        request.addArgumentNoEncoding("region", entity.getRegion());
+        request.addArgumentNoEncoding("name", entity.getName());
+        request.addArgumentNoEncoding("telephone", entity.getTelephone());
+        request.addArgumentNoEncoding("is-anonymous", String.valueOf(entity.isAnonymous() ? 1 : 0));
         
         request.addResponseListener(new ActionListener<NetworkEvent>() {
             @Override

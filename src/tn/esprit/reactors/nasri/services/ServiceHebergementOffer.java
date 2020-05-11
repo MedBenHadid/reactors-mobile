@@ -80,13 +80,13 @@ public class ServiceHebergementOffer implements IService<HebergementOffer>
         
         request.setUrl(Statics.BASE_URL_REFUGEES + "hebergement/edit");
         
-        request.addArgument("id", String.valueOf(entity.getId()));
-        request.addArgument("description", entity.getDescription());
-        request.addArgument("governorat", entity.getGovernorat());
-        request.addArgument("nbr-rooms", String.valueOf(entity.getNumberRooms()));
-        request.addArgument("duration", String.valueOf(entity.getDuration()));
-        request.addArgument("telephone", entity.getTelephone());
-        request.addArgument("user-id", String.valueOf(entity.getUserId()));
+        request.addArgumentNoEncoding("id", String.valueOf(entity.getId()));
+        request.addArgumentNoEncoding("description", entity.getDescription());
+        request.addArgumentNoEncoding("governorat", entity.getGovernorat());
+        request.addArgumentNoEncoding("nbr-rooms", String.valueOf(entity.getNumberRooms()));
+        request.addArgumentNoEncoding("duration", String.valueOf(entity.getDuration()));
+        request.addArgumentNoEncoding("telephone", entity.getTelephone());
+        request.addArgumentNoEncoding("user-id", String.valueOf(entity.getUserId()));
         
         try
         {
@@ -117,20 +117,23 @@ public class ServiceHebergementOffer implements IService<HebergementOffer>
     public boolean add(HebergementOffer entity)
     {
         MultipartRequest request = new MultipartRequest();
+        request.setPost(true);
         
         request.setUrl(Statics.BASE_URL_REFUGEES + "hebergement/new");
         
-        request.addArgument("description", entity.getDescription());
-        request.addArgument("governorat", entity.getGovernorat());
-        request.addArgument("nbr-rooms", String.valueOf(entity.getNumberRooms()));
-        request.addArgument("duration", String.valueOf(entity.getDuration()));
-        request.addArgument("telephone", entity.getTelephone());
-        request.addArgument("user-id", String.valueOf(entity.getUserId()));
+        request.addArgumentNoEncoding("description", entity.getDescription());
+        request.addArgumentNoEncoding("governorat", entity.getGovernorat());
+        request.addArgumentNoEncoding("nbr-rooms", String.valueOf(entity.getNumberRooms()));
+        request.addArgumentNoEncoding("duration", String.valueOf(entity.getDuration()));
+        request.addArgumentNoEncoding("telephone", entity.getTelephone());
+        request.addArgumentNoEncoding("user-id", String.valueOf(entity.getUserId()));
+        
         try
-        {
+        {   
             request.addData("image", 
-                    FileSystemStorage.getInstance().getAppHomePath() + entity.getImage().getName(), 
+                    entity.getImage().getAbsolutePath(), 
                     "image/jpeg;image/jpeg;image/tiff;image/gif");
+            
         }
         catch (IOException ex)
         {
@@ -140,8 +143,7 @@ public class ServiceHebergementOffer implements IService<HebergementOffer>
         request.addResponseListener(new ActionListener<NetworkEvent>() {
             @Override
             public void actionPerformed(NetworkEvent evt) {
-                resultOk = request.getResponseCode() == 200; //Code HTTP 200 OK
-                int x = request.getResponseCode();
+                resultOk = request.getResponseCode() == 200;
                 request.removeResponseListener(this);
             }
         });

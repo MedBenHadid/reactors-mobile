@@ -10,6 +10,7 @@ import com.codename1.components.SpanLabel;
 import com.codename1.io.Log;
 import com.codename1.ui.Button;
 import com.codename1.ui.ComboBox;
+import static com.codename1.ui.Component.CENTER;
 import com.codename1.ui.Container;
 import com.codename1.ui.Font;
 import com.codename1.ui.FontImage;
@@ -18,6 +19,7 @@ import com.codename1.ui.Image;
 import com.codename1.ui.Toolbar;
 import com.codename1.ui.geom.Dimension;
 import com.codename1.ui.layouts.BoxLayout;
+import com.codename1.ui.layouts.FlowLayout;
 import com.codename1.ui.plaf.Style;
 import com.codename1.ui.plaf.UIManager;
 import com.codename1.ui.util.Resources;
@@ -41,7 +43,6 @@ public class MainForm extends Form
     public MainForm() {
         Toolbar.setGlobalToolbar(true);
         this.setTitle("Refugiées");
-        this.setLayout(new BoxLayout(BoxLayout.Y_AXIS));
         
         setupStyle();
         setupToolbar();
@@ -66,8 +67,6 @@ public class MainForm extends Form
                 + "d'hébergements offerts par la communauté \n"
                 + "Vous pouvez aussi parcourir "
                 + "et choisir le réfugié que vous souhaitez soutenir");
-        description.getStyle().setAlignment(CENTER);
-        
         return description;
     }
     
@@ -118,6 +117,7 @@ public class MainForm extends Form
     
     private void setupStyle()
     {
+        this.setLayout(new BoxLayout(BoxLayout.Y_AXIS));
         Font font = Font.createSystemFont(Font.FACE_SYSTEM, Font.STYLE_BOLD, Font.SIZE_MEDIUM);
         this.getStyle().setFont(font);
     }

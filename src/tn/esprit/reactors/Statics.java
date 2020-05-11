@@ -14,4 +14,8 @@ package tn.esprit.reactors;
 public class Statics {
     public static final String BASE_URL="http://127.0.0.1:8000";
     public static final String BASE_URL_REFUGEES="http://127.0.0.1:8000/refugees/api/";
+    
+    
+    
+    public static final int CURRENT_USER_ID = 80;
 }
