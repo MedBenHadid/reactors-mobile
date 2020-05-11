@@ -22,9 +22,11 @@ import com.codename1.ui.layouts.BoxLayout;
 import com.codename1.io.NetworkEvent;
 import com.codename1.ui.Button;
 import com.codename1.ui.Container;
+import com.codename1.ui.FontImage;
 import com.codename1.ui.Image;
 import com.codename1.ui.events.ActionEvent;
 import com.codename1.ui.events.ActionListener;
+import com.codename1.ui.plaf.Style;
 import com.codename1.ui.util.ImageIO;
 import com.codename1.ui.util.UIBuilder;
 import java.io.OutputStream;
@@ -35,6 +37,7 @@ import tn.esprit.reactors.nasri.services.ServiceHebergementOffer;
 import tn.esprit.reactors.nasri.entities.HebergementRequest;
 import tn.esprit.reactors.nasri.enums.CivilStatus;
 import tn.esprit.reactors.nasri.enums.HebergementStatus;
+import tn.esprit.reactors.nasri.gui.MainForm;
 import tn.esprit.reactors.nasri.services.ServiceHebergementRequest;
 
 /**
@@ -77,9 +80,9 @@ public class MyApplicationNasri {
         //hebergementOfferCrud();
         //hebergementRequestCrud();
         
-        Form hi = new Form();
-        hi.setTitle("Nasri");
-        hi.add(new Label("hahahahaha"));
+        
+        
+        Form hi = new MainForm();
         hi.show();
     }
 

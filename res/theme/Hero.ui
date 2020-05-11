@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<component type="Container" name="Hero" cloudDestinationProperty="Hero" >
+  <component type="Label" name="Label" cloudDestinationProperty="Label" text="Nasri" >
+  </component>
+</component>
