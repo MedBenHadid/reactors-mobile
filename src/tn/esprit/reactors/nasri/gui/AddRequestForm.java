@@ -89,7 +89,7 @@ public class AddRequestForm extends Form
             request.setUserId(Statics.CURRENT_USER_ID);
             request.setDescription(descriptionInput.getText());
             request.setNativeCountry(nativeCountryInput.getText());
-            request.setArrivalDate(new Date());
+            request.setArrivalDate(arrivalDateInput.getDate());
             request.setPassportNumber(passportInput.getText());
             request.setCivilStatus(civilStatus);
             request.setChildrenNumber(Integer.parseInt(childrenNumberInput.getText()));
@@ -105,6 +105,7 @@ public class AddRequestForm extends Form
             
             if (result)
             {
+                ((MainForm)_parent).setListRequestsForm(new ListRequestsForm(_parent));
                 _parent.showBack();
             }
         });

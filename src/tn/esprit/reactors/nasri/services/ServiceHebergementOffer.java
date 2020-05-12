@@ -91,7 +91,7 @@ public class ServiceHebergementOffer implements IService<HebergementOffer>
         try
         {
             request.addData("image", 
-                    FileSystemStorage.getInstance().getAppHomePath() + entity.getImage().getName(), 
+                    entity.getImage().getAbsolutePath(), 
                     "image/jpeg;image/jpeg;image/tiff;image/gif");
         }
         catch (IOException ex)
@@ -102,8 +102,7 @@ public class ServiceHebergementOffer implements IService<HebergementOffer>
         request.addResponseListener(new ActionListener<NetworkEvent>() {
             @Override
             public void actionPerformed(NetworkEvent evt) {
-                resultOk = request.getResponseCode() == 200; //Code HTTP 200 OK
-                int x = request.getResponseCode();
+                resultOk = request.getResponseCode() == 200;
                 request.removeResponseListener(this);
             }
         });

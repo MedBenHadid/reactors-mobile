@@ -32,10 +32,10 @@ import java.io.IOException;
  */
 public class MainForm extends Form
 {
-    Form addOfferForm = new AddOfferForm(this);
-    Form addRequestForm = new AddRequestForm(this);
-    Form listOffersForm = new ListOffersForm(this);
-    Form listRequestForm = new ListRequestsForm(this);
+    private Form addOfferForm = new AddOfferForm(this);
+    private Form addRequestsForm = new AddRequestForm(this);
+    private Form listOffersForm = new ListOffersForm(this);
+    private Form listRequestsForm = new ListRequestsForm(this);
     
     Button addOfferBtn;
     Button addRequestBtn;
@@ -80,7 +80,7 @@ public class MainForm extends Form
     {
         Container buttonsContainer = new Container();
         
-        addOfferBtn = new Button("Ajouter un offre d'hébérgement");
+        addOfferBtn = new Button("Ajouter une offre d'hébérgement");
         addRequestBtn = new Button("Ajouter une demande d'hébérgement");
         
         styleButtonsContainer(buttonsContainer);
@@ -106,12 +106,12 @@ public class MainForm extends Form
     {
         addOfferBtn.addActionListener((evt) -> 
         {
-            addOfferForm.show();
+            getAddOfferForm().show();
         });
         
         addRequestBtn.addActionListener((evt) -> 
         {
-            addRequestForm.show();
+            getAddRequestsForm().show();
         });
     }
     
@@ -128,20 +128,20 @@ public class MainForm extends Form
             this.show();
         });
         
-        this.getToolbar().addMaterialCommandToSideMenu("Ajouter un offre d'hébérgement", FontImage.MATERIAL_ADD, (evt) -> {
-            addOfferForm.show();
+        this.getToolbar().addMaterialCommandToSideMenu("Ajouter une offre d'hébérgement", FontImage.MATERIAL_ADD, (evt) -> {
+            getAddOfferForm().show();
         });
         
         this.getToolbar().addMaterialCommandToSideMenu("Ajouter une demande d'hébérgement", FontImage.MATERIAL_ADD, (evt) -> {
-            addRequestForm.show();
+            getAddRequestsForm().show();
         });
         
         this.getToolbar().addMaterialCommandToSideMenu("Liste complete des offres d'hébérgement", FontImage.MATERIAL_INFO, (evt) -> {
-            listOffersForm.show();
+            getListOffersForm().show();
         });
         
         this.getToolbar().addMaterialCommandToSideMenu("Liste complete des demandes d'hébérgement", FontImage.MATERIAL_INFO, (evt) -> {
-            listRequestForm.show();
+            getListRequestsForm().show();
         });
         
         
@@ -149,16 +149,51 @@ public class MainForm extends Form
             this.showBack();
         });*/
         
-        addRequestForm.getToolbar().addMaterialCommandToLeftBar("Back", FontImage.MATERIAL_KEYBOARD_BACKSPACE, (evt) -> {
+        getAddRequestsForm().getToolbar().addMaterialCommandToLeftBar("Back", FontImage.MATERIAL_KEYBOARD_BACKSPACE, (evt) -> {
             this.showBack();
         });
         
-        listOffersForm.getToolbar().addMaterialCommandToLeftBar("Back", FontImage.MATERIAL_KEYBOARD_BACKSPACE, (evt) -> {
+        getListOffersForm().getToolbar().addMaterialCommandToLeftBar("Back", FontImage.MATERIAL_KEYBOARD_BACKSPACE, (evt) -> {
             this.showBack();
         });
         
-        listRequestForm.getToolbar().addMaterialCommandToLeftBar("Back", FontImage.MATERIAL_KEYBOARD_BACKSPACE, (evt) -> {
+        getListRequestsForm().getToolbar().addMaterialCommandToLeftBar("Back", FontImage.MATERIAL_KEYBOARD_BACKSPACE, (evt) -> {
             this.showBack();
         });
     }
+
+    public Form getAddOfferForm() {
+        return addOfferForm;
+    }
+
+    public void setAddOfferForm(Form addOfferForm) {
+        this.addOfferForm = addOfferForm;
+    }
+
+    public Form getAddRequestsForm() {
+        return addRequestsForm;
+    }
+
+    public void setAddRequestsForm(Form addRequestsForm) {
+        this.addRequestsForm = addRequestsForm;
+    }
+
+    public Form getListOffersForm() {
+        return listOffersForm;
+    }
+
+    public void setListOffersForm(Form listOffersForm) {
+        this.listOffersForm = listOffersForm;
+    }
+
+    public Form getListRequestsForm() {
+        return listRequestsForm;
+    }
+
+    public void setListRequestsForm(Form listRequestsForm) {
+        this.listRequestsForm = listRequestsForm;
+    }
+    
+    
+    
 }

@@ -92,6 +92,7 @@ public class AddOfferForm extends Form
             
             if (result)
             {
+                ((MainForm)_parent).setListOffersForm(new ListOffersForm(_parent));
                 _parent.showBack();
             }
         });
@@ -101,7 +102,7 @@ public class AddOfferForm extends Form
     {
         descriptionL = new Label("Description: ");
         governoratL = new Label("Governorat: ");
-        durationL = new Label("Duration: ");
+        durationL = new Label("Durée (mois): ");
         numberRoumsL = new Label("Nombre des chambres: ");
         telephoneL = new Label("Telephone: ");
         imageL = new Label("Image: ");
