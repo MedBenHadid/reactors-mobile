@@ -5,11 +5,13 @@
  */
 package tn.esprit.reactors.nasri.gui;
 
+import com.codename1.capture.Capture;
 import com.codename1.io.File;
 import com.codename1.io.FileSystemStorage;
 import com.codename1.ui.Button;
 import com.codename1.ui.Component;
 import com.codename1.ui.Container;
+import com.codename1.ui.Dialog;
 import com.codename1.ui.Display;
 import com.codename1.ui.FontImage;
 import com.codename1.ui.Form;
@@ -27,6 +29,7 @@ import javafx.stage.FileChooser;
 import tn.esprit.reactors.Statics;
 import tn.esprit.reactors.nasri.entities.HebergementOffer;
 import tn.esprit.reactors.nasri.services.ServiceHebergementOffer;
+import tn.esprit.reactors.nasri.utils.Helpers;
 
 /**
  *
@@ -73,27 +76,48 @@ public class AddOfferForm extends Form
     {
         imagePicker.addActionListener((evt) -> 
         {
-            Display.getInstance().openGallery(callback, Display.GALLERY_IMAGE);
+            //Display.getInstance().openGallery(callback, Display.GALLERY_IMAGE);
+            String i = Capture.capturePhoto(Display.getInstance().getDisplayWidth(), -1);
+            if (i != null)
+            {                    
+                file = new File(i);
+            }
         });
         
+        handleSubmit();
+    }
+    
+    private void handleSubmit()
+    {
         submitBtn.addActionListener((evt) -> 
         {
-            HebergementOffer offer = new HebergementOffer();
-            offer.setUserId(Statics.CURRENT_USER_ID);
-            offer.setDescription(descriptionInput.getText());
-            offer.setGovernorat(governoratInput.getText());
-            offer.setNumberRooms(Integer.parseInt(numberRoomsInput.getText()));
-            offer.setDuration(Integer.parseInt(durationInput.getText()));
-            offer.setTelephone(telephoneInput.getText());
-            offer.setImage(file);
-            
-            
-            boolean result = ServiceHebergementOffer.getInstance().add(offer);
-            
-            if (result)
+            if (validateForm())
             {
-                ((MainForm)_parent).setListOffersForm(new ListOffersForm(_parent));
-                _parent.showBack();
+                HebergementOffer offer = new HebergementOffer();
+                offer.setUserId(Statics.CURRENT_USER_ID);
+                offer.setDescription(descriptionInput.getText());
+                offer.setGovernorat(governoratInput.getText());
+                offer.setNumberRooms(Integer.parseInt(numberRoomsInput.getText()));
+                offer.setDuration(Integer.parseInt(durationInput.getText()));
+                offer.setTelephone(telephoneInput.getText());
+
+                offer.setImage(file);
+
+
+                boolean result = ServiceHebergementOffer.getInstance().add(offer);
+
+                if (result)
+                {
+                    ((MainForm)_parent).setListOffersForm(new ListOffersForm(_parent));
+                    _parent.showBack();
+                }
+            }
+            else
+            {
+                if(Dialog.show("Valeurs entrées non valides", "Voulez vous réinitialiser les champs?", "Oui", "Non"))
+                {
+                    resetForm();
+                }
             }
         });
     }
@@ -158,6 +182,46 @@ public class AddOfferForm extends Form
         });
     }
     
+    
+    private boolean validateForm()
+    {
+        boolean result = true;
+        
+        if (anyInputFieldIsEmpty())
+        {
+            result = false;
+        }
+        else if (file == null)
+        {
+            result = false;
+        }
+        else if (!Helpers.phoneNumberIsValid(telephoneInput.getText()))
+        {
+            result = false;
+        }
+        else if (!Helpers.isNumericAndPositive(durationInput.getText()))
+        {
+            result = false;
+        }
+        else if (!Helpers.isNumericAndPositive(numberRoomsInput.getText()))
+        {
+            result = false;
+        }
+        
+        return result;
+    }
+    
+    
+    private void resetForm()
+    {
+        descriptionInput.setText("");
+        governoratInput.setText("");
+        durationInput.setText("");
+        numberRoomsInput.setText("");
+        telephoneInput.setText("");
+        file = null;
+    }
+    
     private ActionListener callback = e-> 
     {
         if (e != null && e.getSource() != null) 
@@ -166,4 +230,28 @@ public class AddOfferForm extends Form
             file = new File(filePath);
         }
     };
+    
+    private boolean anyInputFieldIsEmpty()
+    {
+        boolean result = false;
+        
+        if (descriptionInput.getText().trim().isEmpty())
+        {
+            result = true;
+        }
+        else if (governoratInput.getText().trim().isEmpty())
+        {
+            result = true;
+        }
+        else if (durationInput.getText().trim().isEmpty())
+        {
+            result = true;
+        }
+        else if (numberRoomsInput.getText().trim().isEmpty())
+        {
+            result = true;
+        }
+        
+        return result;
+    }
 }
