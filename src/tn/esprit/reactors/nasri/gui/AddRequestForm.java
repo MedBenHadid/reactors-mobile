@@ -11,6 +11,7 @@ import com.codename1.ui.Button;
 import com.codename1.ui.CheckBox;
 import com.codename1.ui.Component;
 import com.codename1.ui.Container;
+import com.codename1.ui.Dialog;
 import com.codename1.ui.FontImage;
 import com.codename1.ui.Form;
 import com.codename1.ui.Label;
@@ -24,6 +25,7 @@ import tn.esprit.reactors.nasri.entities.HebergementRequest;
 import tn.esprit.reactors.nasri.enums.CivilStatus;
 import tn.esprit.reactors.nasri.enums.HebergementStatus;
 import tn.esprit.reactors.nasri.services.ServiceHebergementRequest;
+import tn.esprit.reactors.nasri.utils.Helpers;
 
 /**
  *
@@ -74,41 +76,125 @@ public class AddRequestForm extends Form
     {
         this.setTitle("Ajouter une demande d'hébérgement");
         setupForm();
-        setupInputActions();
+        handleSubmit();
         setupToolbar();
     }
     
-    private void setupInputActions()
+    private void handleSubmit()
     {
         submitBtn.addActionListener((evt) -> 
         {
-            CivilStatus civilStatus = civilStatusInput.isOff() ? CivilStatus.Married : CivilStatus.Single;
-            boolean isAnonymous = isAnonymousInput.isOff();
-            
-            HebergementRequest request = new HebergementRequest();
-            request.setUserId(Statics.CURRENT_USER_ID);
-            request.setDescription(descriptionInput.getText());
-            request.setNativeCountry(nativeCountryInput.getText());
-            request.setArrivalDate(arrivalDateInput.getDate());
-            request.setPassportNumber(passportInput.getText());
-            request.setCivilStatus(civilStatus);
-            request.setChildrenNumber(Integer.parseInt(childrenNumberInput.getText()));
-            request.setRegion(regionInput.getText());
-            request.setState(HebergementStatus.inProcess);
-            request.setName(nameInput.getText());
-            request.setTelephone(telephoneInput.getText());
-            request.setAnonymous(isAnonymous);
-            request.setUserId(Statics.CURRENT_USER_ID);
-            
-            
-            boolean result = ServiceHebergementRequest.getInstance().add(request);
-            
-            if (result)
+            if (validateForm())
             {
-                ((MainForm)_parent).setListRequestsForm(new ListRequestsForm(_parent));
-                _parent.showBack();
+                CivilStatus civilStatus = civilStatusInput.isOff() ? CivilStatus.Married : CivilStatus.Single;
+                boolean isAnonymous = isAnonymousInput.isOff();
+
+                HebergementRequest request = new HebergementRequest();
+                request.setUserId(Statics.CURRENT_USER_ID);
+                request.setDescription(descriptionInput.getText());
+                request.setNativeCountry(nativeCountryInput.getText());
+                request.setArrivalDate(arrivalDateInput.getDate());
+                request.setPassportNumber(passportInput.getText());
+                request.setCivilStatus(civilStatus);
+                request.setChildrenNumber(Integer.parseInt(childrenNumberInput.getText()));
+                request.setRegion(regionInput.getText());
+                request.setState(HebergementStatus.inProcess);
+                request.setName(nameInput.getText());
+                request.setTelephone(telephoneInput.getText());
+                request.setAnonymous(isAnonymous);
+                request.setUserId(Statics.CURRENT_USER_ID);
+
+
+                boolean result = ServiceHebergementRequest.getInstance().add(request);
+
+                if (result)
+                {
+                    ((MainForm)_parent).setListRequestsForm(new ListRequestsForm(_parent));
+                    _parent.showBack();
+                }
+            }
+            else
+            {
+                if(Dialog.show("Valeurs entrées non valides", "Voulez vous réinitialiser les champs?", "Oui", "Non"))
+                {
+                    resetForm();
+                }
             }
         });
+    }
+    
+    private void resetForm()
+    {
+        nameInput.setText("");
+        descriptionInput.setText("");
+        regionInput.setText("");
+        nativeCountryInput.setText("");
+        arrivalDateInput.setDate(new Date());
+        passportInput.setText("");
+        civilStatusInput.setOff();
+        childrenNumberInput.setText("");
+        telephoneInput.setText("");
+        isAnonymousInput.setOff();
+    }
+    
+    private boolean validateForm()
+    {
+        boolean result = true;
+        
+        if (anyInputFieldIsEmpty())
+        {
+            result = false;
+        }
+        else if (!Helpers.phoneNumberIsValid(telephoneInput.getText()))
+        {
+            result = false;
+        }
+        else if (!Helpers.isNumericAndPositive(childrenNumberInput.getText()))
+        {
+            result = false;
+        }
+        
+        return result;
+    }
+    
+    private boolean anyInputFieldIsEmpty()
+    {
+        boolean result = false;
+        
+        if (nameInput.getText().trim().isEmpty())
+        {
+            result = true;
+        }
+        else if (descriptionInput.getText().trim().isEmpty())
+        {
+            result = true;
+        }
+        else if (regionInput.getText().trim().isEmpty())
+        {
+            result = true;
+        }
+        else if (nativeCountryInput.getText().trim().isEmpty())
+        {
+            result = true;
+        }
+        else if (arrivalDateInput.getText().trim().isEmpty())
+        {
+            result = true;
+        }
+        else if (passportInput.getText().trim().isEmpty())
+        {
+            result = true;
+        }
+        else if (childrenNumberInput.getText().trim().isEmpty())
+        {
+            result = true;
+        }
+        else if (telephoneInput.getText().trim().isEmpty())
+        {
+            result = true;
+        }
+        
+        return result;
     }
     
     private void setupForm()
