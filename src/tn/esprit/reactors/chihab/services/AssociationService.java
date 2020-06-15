@@ -11,7 +11,7 @@ import java.util.Map;
 import com.codename1.io.NetworkManager;
 import com.codename1.io.rest.Response;
 import com.codename1.io.rest.Rest;
-import com.google.gson.Gson;
+//import com.google.gson.Gson;
 import java.io.IOException;
 import tn.esprit.reactors.chihab.models.Association;
 
@@ -21,7 +21,7 @@ import tn.esprit.reactors.chihab.models.Association;
  */
 public class AssociationService {
         private final JSONParser j;
-        private final Gson g = new Gson();
+       // private final Gson g = new Gson();
         private static AssociationService instance=null;
         private ConnectionRequest req;
         private AssociationService() {
@@ -81,19 +81,22 @@ public class AssociationService {
     
 
         public Response<Map> addAssociation(Association a) {
-            return Rest.post(Statics.BASE_URL + "/api/association").contentType("application/json").body(g.toJson(a)).acceptJson().getAsJsonMap();
+            return null;
+            //return Rest.post(Statics.BASE_URL + "/api/association").contentType("application/json").body(g.toJson(a)).acceptJson().getAsJsonMap();
         }
 
         public Association findAssByManager(int managerId){
-            return parseAssociation((Map<String,Object>) Rest.get(Statics.BASE_URL +"/api/associations/findoneby/manager/"+managerId).acceptJson().getAsJsonMap().getResponseData());
-
+            //return parseAssociation((Map<String,Object>) Rest.get(Statics.BASE_URL +"/api/associations/findoneby/manager/"+managerId).acceptJson().getAsJsonMap().getResponseData());
+            return null;
         }
 
         public Association getAssociation(int assId) {
-            return parseAssociation((Map<String,Object>)Rest.get(Statics.BASE_URL + "/api/association/"+assId).acceptJson().getAsJsonMap().getResponseData());
+           //return parseAssociation((Map<String,Object>)Rest.get(Statics.BASE_URL + "/api/association/"+assId).acceptJson().getAsJsonMap().getResponseData());
+            return null;
         }
         public Response<Map> update(Association a){
-            return Rest.patch(Statics.BASE_URL + "/api/association/update").contentType("application/json").body(g.toJson(a)).acceptJson().getAsJsonMap();
+            //return Rest.patch(Statics.BASE_URL + "/api/association/update").contentType("application/json").body(g.toJson(a)).acceptJson().getAsJsonMap();
+            return null;
         }
 
         public MultipartRequest uploadImage (String filePath, String fileName) throws IOException{
