@@ -42,7 +42,7 @@ public login()
         setTitle("Login");
         setLayout(BoxLayout.y());
         Style loginStyle= getAllStyles();
-        loginStyle.setBgColor(0x1A5D65);
+        loginStyle.setBgColor(0xd3d3d3);
          Container cnt1=new Container(new FlowLayout(Container.CENTER));
                   Container cnt4=new Container(new FlowLayout(Container.CENTER));
         Container cnt5=new Container(new FlowLayout(Container.CENTER));
