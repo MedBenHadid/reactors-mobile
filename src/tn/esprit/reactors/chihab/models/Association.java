@@ -1,12 +1,12 @@
 package tn.esprit.reactors.chihab.models;
 
+import java.util.Objects;
+
 public class Association {
 
     private int id;
-    private User manager;
-    private Category domaine;
     private String nom,photoAgence,pieceJustificatif,rue,description,ville,horaireTravail;
-    private int telephone,codePostal;
+    private int manager,domaine,telephone,codePostal;
     private boolean approuved;
     private Double lat,lon;
     public Association() {
@@ -17,6 +17,59 @@ public class Association {
         this.nom = nom;
     }
 
+    public Association(int manager, int domaine, String nom, String photoAgence, String pieceJustificatif, String rue, String description, String ville, String horaireTravail, int telephone, int codePostal, boolean approuved, Double lat, Double lon) {
+        this.manager = manager;
+        this.domaine = domaine;
+        this.nom = nom;
+        this.photoAgence = photoAgence;
+        this.pieceJustificatif = pieceJustificatif;
+        this.rue = rue;
+        this.description = description;
+        this.ville = ville;
+        this.horaireTravail = horaireTravail;
+        this.telephone = telephone;
+        this.codePostal = codePostal;
+        this.approuved = approuved;
+        this.lat = lat;
+        this.lon = lon;
+    }
+
+    @Override
+    public int hashCode() {
+        int hash = 7;
+        hash = 71 * hash + this.id;
+        hash = 71 * hash + Objects.hashCode(this.nom);
+        return hash;
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj) {
+            return true;
+        }
+        if (obj == null) {
+            return false;
+        }
+        if (getClass() != obj.getClass()) {
+            return false;
+        }
+        final Association other = (Association) obj;
+        if (this.id != other.id) {
+            return false;
+        }
+        if (!Objects.equals(this.nom, other.nom)) {
+            return false;
+        }
+        return true;
+    }
+
+
+
+    
+
+    
+
+
     public int getId() {
         return id;
     }
@@ -25,19 +78,19 @@ public class Association {
         this.id = id;
     }
 
-    public User getManager() {
+    public int getManager() {
         return manager;
     }
 
-    public void setManager(User manager) {
+    public void setManager(int manager) {
         this.manager = manager;
     }
 
-    public Category getDomaine() {
+    public int getDomaine() {
         return domaine;
     }
 
-    public void setDomaine(Category domaine) {
+    public void setDomaine(int domaine) {
         this.domaine = domaine;
     }
 
@@ -137,15 +190,10 @@ public class Association {
         this.approuved = approuved;
     }
 
-    public String getManagerUserName() {
-        return this.getManager().getUsername();
-    }
 
-    public String getDomaineNom() {
-        return this.getDomaine().getNom();
-    }
     @Override
     public String toString() {
-        return "Association{id= "+id+" nom= "+nom+" ville= "+ville+"}"+System.getProperty("line.separator");
+        return " {" + "id=" + id + "} ";
     }
+
 }

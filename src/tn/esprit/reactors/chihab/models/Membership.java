@@ -5,23 +5,90 @@ import tn.esprit.reactors.chihab.models.enums.AccessType;
 
 
 public class Membership {
-    private int id;
-    private String fonction, description;
-    private User member;
+    public static final String INVITE_PENDING = "INVITE_PENDING";
+    public static final String REQUEST_PENDING = "REQUEST_PENDING";
+    public static final String DENIED_BY_USER = "DENIED_BY_USER";
+    public static final String DENIED_BY_ASS = "DENIED_BY_ASS";
+    public static final String ACCEPTED = "ACCEPTED";
+    public static final String ALL = "ALL";
+    private int id, assId, memberId,role;
+    private String fonction, description, status;
 
-    public User getMember() {
-        return member;
+    public int getRole() {
+        return role;
     }
 
-    public void setMember(User member) {
-        this.member = member;
+    public void setRole(int role) {
+        this.role = role;
+    }
+
+    private double lon,lat;
+
+    public double getLon() {
+        return lon;
+    }
+
+    public void setLon(double lon) {
+        this.lon = lon;
+    }
+
+    public double getLat() {
+        return lat;
+    }
+
+    public void setLat(double lat) {
+        this.lat = lat;
+    }
+
+
+
+    public int getAssId() {
+        return assId;
+    }
+
+    public void setAssId(int assId) {
+        this.assId = assId;
+    }
+
+    public int getMemberId() {
+        return memberId;
+    }
+
+    public void setMemberId(int memberId) {
+        this.memberId = memberId;
+    }
+    
+
+    public String getStatus() {
+        return status;
+    }
+
+    public void setStatus(String status) {
+        this.status = status;
     }
     private AccessType access;
 
-    public Membership(int id, String fonction, String description) { 
+    public Membership(int id, int assId, int memberId, int role,String fonction, String description, String status, double lon, double lat) { 
         this.id=id;
         this.fonction=fonction;
         this.description=description;
+        this.status=status;
+        this.assId=assId;
+        this.memberId=memberId;
+        this.lon=lon;
+        this.lat=lat;
+        this.role=role;
+    }
+
+    public Membership(int assId, int memberId, int role,String fonction, String description, String status, double lon, double lat) {
+        this.assId = assId;
+        this.memberId = memberId;
+        this.fonction = fonction;
+        this.description = description;
+        this.status = status;
+        this.role=role;
+        this.lon=lon;
+        this.lat=lat;
     }
 
     public int getId() {
@@ -61,13 +128,10 @@ public class Membership {
 
     @Override
     public String toString() {
-        return "Membership{" +
-                "id=" + id +
-                ", fonction='" + fonction + '\'' +
-                ", description='" + description + '\'' +
-                ", access=" + access +
-                '}';
+        return "Membership{" + "id=" + id + ", assId=" + assId + ", memberId=" + memberId + ", status=" + status + '}';
     }
+
+
 
     @Override
     public int hashCode() {

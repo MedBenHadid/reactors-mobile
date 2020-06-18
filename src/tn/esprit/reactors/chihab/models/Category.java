@@ -9,8 +9,8 @@ public class Category {
     public Category() {
     }
 
-    public Category(int i, String s, String s1) {
-        this.id = i;
+    public Category(int id, String s, String s1) {
+        this.id = id;
         this.nom = s;
         this.description = s1;
     }

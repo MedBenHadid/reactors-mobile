@@ -17,10 +17,9 @@ import com.codename1.ui.layouts.Layout;
 public class ReactorsForm extends Form{
     private static final Toolbar.BackCommandPolicy BACK_POLICY = Toolbar.BackCommandPolicy.AS_ARROW;
     public ReactorsForm(String title,Form previous){
-        this.setTitle(title); 
+        super(title,new BoxLayout(BoxLayout.Y_AXIS));
         this.getToolbar().setBackCommand("PropertyCross", BACK_POLICY,  e -> previous.showBack());
         this.getToolbar().setTitleCentered(true);
-        this.setLayout(new BoxLayout(BoxLayout.Y_AXIS));
     }
     public ReactorsForm(String title, Form previous,Layout contentPaneLayout) {
         super(title,contentPaneLayout);
@@ -28,5 +27,5 @@ public class ReactorsForm extends Form{
         this.getToolbar().setBackCommand("PropertyCross", BACK_POLICY,  e -> previous.showBack());
         this.getToolbar().setTitleCentered(true);
     }
-    
+    public ReactorsForm(){}
 }
