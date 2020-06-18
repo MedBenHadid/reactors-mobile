@@ -189,8 +189,8 @@ public class UpdateRequestForm extends Form
             
             if (result)
             {
-                ((MainForm)_parent).setListRequestsForm(new ListRequestsForm(_parent));
-                _parent.showBack();
+                _ListRequestsForm listRequestsForm = new _ListRequestsForm();
+                listRequestsForm.showBack();
             }
         });
     }

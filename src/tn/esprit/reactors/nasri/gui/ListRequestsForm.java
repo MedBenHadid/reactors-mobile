@@ -100,7 +100,7 @@ public class ListRequestsForm extends Form
                 {
                     if(Dialog.show("Confirmation", "Vous etes sure ?", "Ok", "Annuler"))
                     {
-                        new UpdateRequestForm(_parent, request).show();
+                        new UpdateRequestForm(this, request).show();
                     }
                 });
                 
@@ -109,7 +109,7 @@ public class ListRequestsForm extends Form
                     if(Dialog.show("Confirmation", "Vous etes sure ?", "Ok", "Annuler"))
                     {
                         ServiceHebergementRequest.getInstance().delete(request.getId());
-                        new ListRequestsForm(_parent).show();
+                        new _ListRequestsForm().show();
                     }
                 });
                 

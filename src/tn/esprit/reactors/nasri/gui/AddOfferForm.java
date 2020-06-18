@@ -165,7 +165,7 @@ public class AddOfferForm extends Form
     {
         Container formContainer = new Container(new BorderLayout());
         
-        formContainer.add(BorderLayout.WEST, first);
+        formContainer.add(BorderLayout.CENTER, first);
 
         return formContainer;
     }

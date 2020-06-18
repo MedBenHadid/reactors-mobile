@@ -14,12 +14,7 @@ import com.codename1.ui.events.ActionListener;
 import java.io.IOException;
 import java.util.ArrayList;
 import com.codename1.io.File;
-import com.codename1.components.FileEncodedImage;
-import com.codename1.io.FileSystemStorage;
 import com.codename1.io.MultipartRequest;
-import com.codename1.ui.Image;
-import com.codename1.ui.util.ImageIO;
-import java.io.OutputStream;
 import java.util.List;
 import java.util.Map;
 import tn.esprit.reactors.Statics;
@@ -43,7 +38,7 @@ public class ServiceHebergementOffer implements IService<HebergementOffer>
     
     private ServiceHebergementOffer() 
     {
-         request = new ConnectionRequest();
+        request = new ConnectionRequest();
     }
     public static ServiceHebergementOffer getInstance() 
     {

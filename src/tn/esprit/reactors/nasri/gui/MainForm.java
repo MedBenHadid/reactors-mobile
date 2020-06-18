@@ -144,11 +144,6 @@ public class MainForm extends Form
             getListRequestsForm().show();
         });
         
-        
-        /*addOfferForm.getToolbar().addMaterialCommandToLeftBar("Back", FontImage.MATERIAL_KEYBOARD_BACKSPACE, (evt) -> {
-            this.showBack();
-        });*/
-        
         getAddRequestsForm().getToolbar().addMaterialCommandToLeftBar("Back", FontImage.MATERIAL_KEYBOARD_BACKSPACE, (evt) -> {
             this.showBack();
         });

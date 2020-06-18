@@ -3,8 +3,9 @@
 <resource majorVersion="1" minorVersion="11" useXmlUI="false">
     <ui name="HeroImage" />
     <image name="solidarity.jpg"  />
+    <image name="solidarity2.jpg"  />
+    <image name="Square_200x200.png"  />
     <theme name="Theme">
         <val key="@includeNativeBool" value="true" />
-        <font key="Title.font" type="ttf" face="0" style="0" size="0" name="native:MainBold" family="native:MainBold" sizeSettings="4" actualSize="24.5" />
     </theme>
 </resource>

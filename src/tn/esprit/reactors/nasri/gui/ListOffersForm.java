@@ -99,7 +99,7 @@ public class ListOffersForm extends Form
                 {
                     if(Dialog.show("Confirmation", "Vous etes sure ?", "Ok", "Annuler"))
                     {
-                        new UpdateOfferForm(_parent, offer).show();
+                        new UpdateOfferForm(this, offer).show();
                     }
                 });
                 
@@ -108,7 +108,7 @@ public class ListOffersForm extends Form
                     if(Dialog.show("Confirmation", "Vous etes sure ?", "Ok", "Annuler"))
                     {
                         ServiceHebergementOffer.getInstance().delete(offer.getId());
-                        new ListOffersForm(_parent).show();
+                        new _ListOffersForm().show();
                     }
                 });
                 

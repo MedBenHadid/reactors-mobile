@@ -85,8 +85,8 @@ public class UpdateOfferForm extends Form
             
             if (result)
             {
-                ((MainForm)_parent).setListOffersForm(new ListOffersForm(_parent));
-                _parent.showBack();
+                _ListOffersForm listOffersForm = new _ListOffersForm();
+                listOffersForm.showBack();
             }
         });
     }

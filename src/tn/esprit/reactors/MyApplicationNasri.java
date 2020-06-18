@@ -37,7 +37,9 @@ import tn.esprit.reactors.nasri.services.ServiceHebergementOffer;
 import tn.esprit.reactors.nasri.entities.HebergementRequest;
 import tn.esprit.reactors.nasri.enums.CivilStatus;
 import tn.esprit.reactors.nasri.enums.HebergementStatus;
+import tn.esprit.reactors.nasri.gui.HomeForm;
 import tn.esprit.reactors.nasri.gui.MainForm;
+import tn.esprit.reactors.nasri.gui.test.*;
 import tn.esprit.reactors.nasri.services.ServiceHebergementRequest;
 
 /**
@@ -82,7 +84,8 @@ public class MyApplicationNasri {
         
         
         
-        Form hi = new MainForm();
+        //Form hi = new InboxForm();
+        Form hi = new HomeForm();
         hi.show();
     }
 

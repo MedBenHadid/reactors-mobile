@@ -17,5 +17,5 @@ public class Statics {
     
     
     
-    public static final int CURRENT_USER_ID = 80;
+    public static final int CURRENT_USER_ID = 72;
 }
